@@ -30,7 +30,6 @@ export default function Dashboard() {
     else setResults((prev) => [...prev, ...res.data]);
 
     setLoading(false);
-    console.log(res.data);
   }
 
   async function loadMore() {
@@ -58,7 +57,6 @@ export default function Dashboard() {
     setSelected(index);
     setImgUrl(res.data.url);
   }
-  console.log(process.env.FIREBASE_SERVICE_ACCOUNT)
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 px-4 py-6 flex flex-col items-center">
