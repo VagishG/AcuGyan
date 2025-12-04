@@ -1,16 +1,17 @@
-import admin from "firebase-admin"
-import { getStorage } from "firebase-admin/storage"
-import path from "path"
-import fs from "fs"
+import admin from "firebase-admin";
+import { getStorage } from "firebase-admin/storage";
+import path from "path";
+import fs from "fs";
 
 if (!admin.apps.length) {
-  const serviceAccountPath = path.join(process.cwd(), "firebase.json")
-  const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf8"))
+  const serviceAccount = JSON.parse(
+    process.env.FIREBASE_SERVICE_ACCOUNT as string
+  );
 
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    storageBucket: process.env.FIREBASE_BUCKET
-  })
+    storageBucket: process.env.FIREBASE_BUCKET,
+  });
 }
 
-export const storage = getStorage().bucket()
+export const storage = getStorage().bucket();
