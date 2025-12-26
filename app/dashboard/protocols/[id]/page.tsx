@@ -19,7 +19,7 @@ export default function Dashboard() {
               </svg>
               <h2 className="text-lg font-bold leading-tight tracking-[-0.015em]">
                 Acupressure Protocols
-              </h2>
+              </h2> 
             </div>
           </div>
         </header>

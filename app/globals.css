@@ -1,5 +1,31 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #22c55e;
+  --color-primary-hover: #16a34a;
+  --color-background-light: #f4f9f6;
+  --color-background-dark: #0a1f16;
+  --color-text-main: #112a1e;
+  --color-text-sub: #4a6e5d;
+  --color-input-bg: #e8f3ed;
+
+  --font-display: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
 .material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
 }

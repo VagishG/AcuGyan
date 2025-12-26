@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { ThemeToggle } from "../components/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
 
-export default function Login() {
+export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
@@ -26,7 +26,7 @@ export default function Login() {
     setLoading(true);
     try {
       await signInWithPopup(auth, googleProvider);
-      // Redirect to dashboard or home after successful login
+      // Redirect to dashboard or home after successful registration
       window.location.href = "/home";
     } catch (error) {
       console.error("Error signing in with Google", error);
@@ -50,15 +50,15 @@ export default function Login() {
           {/* Header & Logo */}
           <div className="flex flex-col items-center gap-4">
             <div className="relative flex items-center justify-center">
-              <div className="flex items-center justify-center h-24 w-24 rounded-3xl bg-input-bg dark:bg-white/5 text-primary shadow-sm">
+              <div className="flex items-center justify-center h-20 w-20 rounded-3xl bg-input-bg dark:bg-white/5 text-primary shadow-sm">
                 {/* Lotus Icon SVG */}
                 <svg
-                  width="48"
-                  height="48"
+                  width="40"
+                  height="40"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-12 h-12 stroke-[1.5]"
+                  className="w-10 h-10 stroke-[1.5]"
                 >
                   <path
                     d="M12 21C12 21 8 16 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12C16 16 12 21 12 21Z"
@@ -96,31 +96,54 @@ export default function Login() {
 
             <div className="flex flex-col items-center justify-center gap-1">
               <h1 className="text-3xl font-bold tracking-tight text-center text-text-main dark:text-white">
-                AcuTherapy
+                Create Account
               </h1>
-              <p className="text-primary text-base font-medium text-center">
-                Your companion for acupressure therapy.
+              <p className="text-text-sub text-base font-normal text-center">
+                Join AcuTherapy today
               </p>
             </div>
           </div>
 
           {/* Form */}
           <form
-            className="flex flex-col gap-5 px-1"
+            className="flex flex-col gap-4 px-1"
             onSubmit={(e) => e.preventDefault()}
           >
+            {/* Name */}
+            <div className="flex flex-col gap-2">
+              <label
+                htmlFor="name"
+                className="text-text-main dark:text-gray-200 text-sm font-semibold ml-1"
+              >
+                Full Name
+              </label>
+              <div className="relative">
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="John Doe"
+                  className="w-full h-14 rounded-xl bg-input-bg dark:bg-white/5 border-transparent focus:border-primary focus:bg-white dark:focus:bg-white/10 focus:ring-0 text-text-main dark:text-white placeholder:text-text-sub/50 p-4 text-base transition-all"
+                />
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-text-sub/60 pointer-events-none">
+                  <span className="material-symbols-outlined text-[20px]">
+                    person
+                  </span>
+                </div>
+              </div>
+            </div>
+
             {/* Email */}
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="email"
                 className="text-text-main dark:text-gray-200 text-sm font-semibold ml-1"
               >
-                Email or Phone Number
+                Email Address
               </label>
               <div className="relative">
                 <input
                   id="email"
-                  type="text"
+                  type="email"
                   placeholder="name@example.com"
                   className="w-full h-14 rounded-xl bg-input-bg dark:bg-white/5 border-transparent focus:border-primary focus:bg-white dark:focus:bg-white/10 focus:ring-0 text-text-main dark:text-white placeholder:text-text-sub/50 p-4 text-base transition-all"
                 />
@@ -134,26 +157,18 @@ export default function Login() {
 
             {/* Password */}
             <div className="flex flex-col gap-2">
-              <div className="flex justify-between items-center ml-1">
-                <label
-                  htmlFor="password"
-                  className="text-text-main dark:text-gray-200 text-sm font-semibold"
-                >
-                  Password
-                </label>
-                <a
-                  href="#"
-                  className="text-primary text-xs font-semibold hover:underline"
-                >
-                  Forgot?
-                </a>
-              </div>
+              <label
+                htmlFor="password"
+                className="text-text-main dark:text-gray-200 text-sm font-semibold ml-1"
+              >
+                Password
+              </label>
 
               <div className="relative">
                 <input
                   id="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
+                  placeholder="Create a password"
                   className="w-full h-14 rounded-xl bg-input-bg dark:bg-white/5 border-transparent focus:border-primary focus:bg-white dark:focus:bg-white/10 focus:ring-0 text-text-main dark:text-white placeholder:text-text-sub/50 p-4 pr-12 text-base transition-all"
                 />
                 <button
@@ -168,18 +183,18 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Login Button */}
+            {/* Register Button */}
             <div className="pt-2">
               <button
                 type="submit"
                 className="w-full h-14 rounded-xl bg-primary hover:bg-primary-hover active:scale-[0.98] text-white text-lg font-bold tracking-wide shadow-lg shadow-primary/25 transition-all duration-200"
               >
-                Login
+                Sign Up
               </button>
             </div>
 
             {/* Divider */}
-            <div className="relative flex items-center py-1">
+            <div className="relative flex items-center py-2">
               <div className="flex-grow border-t border-gray-200 dark:border-white/10"></div>
               <span className="flex-shrink-0 mx-4 text-xs font-semibold text-text-sub/60 uppercase">
                 Or continue with
@@ -214,43 +229,18 @@ export default function Login() {
               </svg>
               {loading ? "Signing in..." : "Google"}
             </button>
-
-            {/* Multi-Factor / Face ID */}
-            <div className="flex items-center justify-center pt-2">
-              <button
-                type="button"
-                className="flex items-center gap-2 text-text-sub hover:text-primary transition-colors text-sm font-medium p-2"
-              >
-                <span className="material-symbols-outlined text-[22px]">
-                  fingerprint
-                </span>
-                <span>Sign in with Face ID</span>
-              </button>
-            </div>
           </form>
 
           {/* Footer */}
-          <div className="flex flex-col items-center gap-6">
+          <div className="flex flex-col items-center pb-6">
             <p className="text-text-sub text-sm text-center">
-              Don&apos;t have an account?{" "}
+              Already have an account?{" "}
               <Link
-                href="/register"
+                href="/login"
                 className="text-primary font-bold hover:underline"
               >
-                Register
+                Log In
               </Link>
-            </p>
-
-            <p className="text-text-sub/60 text-[11px] text-center leading-relaxed">
-              By continuing, you agree to AcuTherapy&apos;s{" "}
-              <a href="#" className="underline hover:text-text-main">
-                Terms of Service
-              </a>{" "}
-              and{" "}
-              <a href="#" className="underline hover:text-text-main">
-                Privacy Policy
-              </a>
-              .
             </p>
           </div>
         </div>
